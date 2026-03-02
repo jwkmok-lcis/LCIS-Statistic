@@ -45,7 +45,7 @@ export async function getWeeklySummary(startDate: string, endDate: string) {
     supabase.from('meeting_sessions').select('id, weekly_record_id, meeting_type').in('weekly_record_id', recordIds),
   ])
   
-  let attendanceCounts: Record<string, { present: number; total: number }> = {}
+  const attendanceCounts: Record<string, { present: number; total: number }> = {}
   if (sessions.data && sessions.data.length > 0) {
     const sessionIds = sessions.data.map(s => s.id)
     const { data: attendanceData } = await supabase

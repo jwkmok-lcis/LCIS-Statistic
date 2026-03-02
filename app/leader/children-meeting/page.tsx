@@ -37,7 +37,7 @@ export default async function ChildrenMeetingPage({
   const members: Member[] = membersData || []
 
   // Get existing attendance for this week
-  let existingAttendance: Record<string, boolean> = {}
+  const existingAttendance: Record<string, boolean> = {}
 
   const { data: weeklyRecord } = await supabase
     .from('weekly_records')
