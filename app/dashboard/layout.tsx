@@ -28,47 +28,73 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const roles = p?.roles || []
   const isAdmin = roles.includes('ADMIN')
   const isAccounting = roles.includes('ACCOUNTING')
+  const isChildren = roles.includes('CHILDREN_COORDINATOR')
+  const isYouth = roles.includes('YOUTH_COORDINATOR')
+
+  // Build nav items based on roles
+  const navItems: { label: string; href: string; icon: string }[] = [
+    { label: 'Home', href: '/dashboard', icon: '🏠' },
+    { label: 'Submit Stats', href: '/leader/dashboard', icon: '📝' },
+  ]
+
+  if (isChildren) {
+    navItems.push({ label: "Children", href: '/leader/children-meeting', icon: '👧' })
+  }
+  if (isYouth) {
+    navItems.push({ label: 'Youth', href: '/leader/youth-meeting', icon: '🧑' })
+  }
+  if (isAdmin || isAccounting) {
+    navItems.push({ label: 'Offerings', href: '/accounting/dashboard', icon: '💰' })
+  }
+  if (isAdmin) {
+    navItems.push({ label: 'Admin', href: '/admin/dashboard', icon: '⚙️' })
+  }
+  navItems.push({ label: 'Reports', href: '/reports', icon: '📊' })
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top nav bar */}
-      <nav className="bg-white border-b border-gray-200 px-4 py-3">
+      <nav className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="text-lg font-bold text-gray-900">
-              Church Statistics
+              ⛪ Church Stats
             </Link>
-            <div className="hidden md:flex items-center gap-4 text-sm">
-              <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 transition">
-                Dashboard
-              </Link>
-              <Link href="/leader/dashboard" className="text-gray-600 hover:text-gray-900 transition">
-                Submit Stats
-              </Link>
-              {(isAdmin || isAccounting) && (
-                <Link href="/accounting/dashboard" className="text-gray-600 hover:text-gray-900 transition">
-                  Offerings
+            <div className="hidden md:flex items-center gap-1 text-sm">
+              {navItems.map(item => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-1.5 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition"
+                >
+                  <span className="mr-1">{item.icon}</span>
+                  {item.label}
                 </Link>
-              )}
-              {isAdmin && (
-                <Link href="/admin/dashboard" className="text-gray-600 hover:text-gray-900 transition">
-                  Admin
-                </Link>
-              )}
-              <Link href="/reports" className="text-gray-600 hover:text-gray-900 transition">
-                Reports
-              </Link>
+              ))}
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-right">
+            <div className="text-right hidden sm:block">
               <p className="text-sm font-medium text-gray-900">{p?.name || user.email}</p>
               <p className="text-xs text-gray-500">
-                {roles.map(r => roleLabels[r] || r).join(', ')}
+                {roles.map(r => roleLabels[r] || r).join(' · ')}
               </p>
             </div>
             <LogoutButton />
           </div>
+        </div>
+        {/* Mobile nav */}
+        <div className="md:hidden flex items-center gap-1 mt-2 overflow-x-auto pb-1 text-sm">
+          {navItems.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="px-3 py-1.5 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition whitespace-nowrap flex-shrink-0"
+            >
+              <span className="mr-1">{item.icon}</span>
+              {item.label}
+            </Link>
+          ))}
         </div>
       </nav>
 
