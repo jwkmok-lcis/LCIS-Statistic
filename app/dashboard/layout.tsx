@@ -6,7 +6,7 @@ import type { Profile } from '@/lib/types'
 
 const roleLabels: Record<string, string> = {
   ADMIN: 'Admin',
-  DISTRICT_LEADER: 'District Leader',
+  DISTRICT_COORDINATOR: 'District Coordinator',
   ACCOUNTING: 'Accounting',
   CHILDREN_COORDINATOR: "Children's Coordinator",
   YOUTH_COORDINATOR: 'Youth Coordinator',

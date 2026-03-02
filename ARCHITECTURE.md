@@ -2,7 +2,7 @@
 
 ## Overview
 
-A web application for church district leaders to submit weekly meeting statistics, track children/youth membership and attendance, record offering counts, and generate reports. Built with Next.js, Supabase, and Tailwind CSS.
+A web application for church district coordinators to submit weekly meeting statistics, track children/youth membership and attendance, record offering counts, and generate reports. Built with Next.js, Supabase, and Tailwind CSS.
 
 ## Problem Statement
 
@@ -18,7 +18,7 @@ Weekly church statistics are currently collected via scattered methods (spreadsh
 | Role | Can Do |
 |------|--------|
 | **ADMIN** | Everything. Manage districts, users, pledge campaigns. View all data & reports. |
-| **DISTRICT_LEADER** | Submit weekly stats for assigned district(s). Manage children/youth member lists. |
+| **DISTRICT_COORDINATOR** | Submit weekly stats for assigned district(s). Manage children/youth member lists. |
 | **CHILDREN_COORDINATOR** | Manage children's member list & attendance for assigned district(s). |
 | **YOUTH_COORDINATOR** | Manage youth member list & attendance for assigned district(s). |
 | **ACCOUNTING** | Enter electronic offerings for any district. View offering reports. |
@@ -114,7 +114,7 @@ event_participation
 /auth/login                → Login page
 /dashboard                 → Overview dashboard (role-aware)
 
-/leader/dashboard          → District leader: select week & district, see submission status
+/leader/dashboard          → District coordinator: select week & district, see submission status
 /leader/lords-table        → Submit Lord's Table attendance
 /leader/prophesying        → Submit prophesying count
 /leader/small-group        → Submit small group counts
@@ -135,7 +135,7 @@ event_participation
 
 ## Workflows
 
-### Weekly Submission (District Leader)
+### Weekly Submission (District Coordinator)
 1. Log in → Go to "Submit Stats"
 2. Select district and week date
 3. Fill in each meeting's stats (Lord's Table, prophesying, small group)
